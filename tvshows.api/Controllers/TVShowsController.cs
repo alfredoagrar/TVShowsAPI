@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Features.TVShows.CreateTVShow;
+using CleanArchitecture.Application.Features.TVShows.DeleteTVShowShows;
 using CleanArchitecture.Application.Features.TVShows.GetAllTVShows;
 using CleanArchitecture.Application.Features.TVShows.UpdateTVShows;
 using MediatR;
@@ -37,6 +38,16 @@ public class TVShowsController: ControllerBase
     [HttpPut]
     public async Task<ActionResult<UpdateTVShowResponse>> Update(
         UpdateTVShowRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
+
+
+    [HttpDelete]
+    public async Task<ActionResult<DeleteTVShowShowsResponse>> Delete(
+        DeleteTVShowShowsRequest request,
         CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(request, cancellationToken);
