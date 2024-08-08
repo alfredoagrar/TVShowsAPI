@@ -12,25 +12,13 @@ public class DataContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<TvShow>().HasData(
-            new TvShow
-            {
-                Id = 1,
-                Name = "Breaking Bad",
-                Favorite = true
-            },
-            new TvShow
-            {
-                Id = 2,
-                Name = "Game of Thrones",
-                Favorite = false
-            },
-            new TvShow
-            {
-                Id = 3,
-                Name = "Stranger Things",
-                Favorite = true
-            }
-        );
+        var tvShows = Enumerable.Range(1, 100).Select(i => new TvShow
+        {
+            Id = i,
+            Name = $"TvShow {i}",
+            Favorite = i % 2 == 0 // Alterna entre verdadero y falso
+        }).ToArray();
+
+        modelBuilder.Entity<TvShow>().HasData(tvShows);
     }
 }
