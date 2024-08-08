@@ -29,13 +29,25 @@ public class BaseRepository<TEntity> : IBaseMultimediaRepository<TEntity> where 
         return Context.Set<TEntity>().ToListAsync(cancellationToken);
     }
 
-    public void Update(int Id, TEntity entity)
+    public async Task Update(int id, TEntity entity, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var existingEntity = await Context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+        if (existingEntity != null)
+        {
+            Context.Entry(existingEntity).CurrentValues.SetValues(entity);
+            await Context.SaveChangesAsync(cancellationToken);
+        }
     }
 
-    public void Delete(int Id)
+    public async Task Delete(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await Context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+
+        if (entity != null)
+        {
+            Context.Set<TEntity>().Remove(entity);
+            await Context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

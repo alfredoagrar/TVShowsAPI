@@ -19,13 +19,16 @@ namespace CleanArchitecture.Application.Repositories
         /// </summary>
         /// <param name="Id">The unique identifier of the multimedia entity to update.</param>
         /// <param name="entity">The updated multimedia entity.</param>
-        void Update(int Id, T entity);
+        /// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
+        Task Update(int Id, T entity, CancellationToken cancellationToken);
 
         /// <summary>
         /// Deletes a multimedia entity by its unique identifier.
+        /// 
+        /// <param name="cancellationToken">A cancellation token to observe while waiting for the task to complete.</param>
         /// </summary>
         /// <param name="Id">The unique identifier of the multimedia entity to delete.</param>
-        void Delete(int Id);
+        Task Delete(int Id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Retrieves a multimedia entity by its unique identifier.

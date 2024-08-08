@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.Features.TVShows.CreateTVShow;
 using CleanArchitecture.Application.Features.TVShows.GetAllTVShows;
+using CleanArchitecture.Application.Features.TVShows.UpdateTVShows;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,16 @@ public class TVShowsController: ControllerBase
     public async Task<ActionResult<List<GetAllTVShowsResponse>>> GetAll(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new GetAllTVShowsRequest(), cancellationToken);
+        return Ok(response);
+    }
+
+
+    [HttpPut]
+    public async Task<ActionResult<UpdateTVShowResponse>> Update(
+        UpdateTVShowRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
 }

@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Features\TVShows\DeleteTVShow\" />
-    <Folder Include="Features\TVShows\UpdateTVShow\" />
   </ItemGroup>
 
 </Project>
