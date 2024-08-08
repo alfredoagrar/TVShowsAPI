@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace tvshows.api.Controllers;
 
 [ApiController]
-[Route("controllers")]
+[Route("[controller]")]
 public class TVShowsController: ControllerBase
 {
     private readonly IMediator _mediator;
